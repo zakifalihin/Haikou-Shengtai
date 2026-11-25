@@ -5,7 +5,7 @@ export interface RfqPayload {
   division: string;
   volume: string;
   message: string;
-  botcheck?: boolean;
+  website?: string;
   source: string;
 }
 
@@ -15,56 +15,48 @@ export interface RfqSubmitResult {
 }
 
 /**
- * Submits a B2B RFQ via Web3Forms (`https://api.web3forms.com/submit`)
- * using `process.env.NEXT_PUBLIC_WEB3FORMS_KEY`.
+ * Submits a B2B RFQ directly to the Hostinger PHP SMTP endpoint (`/api/rfq.php`).
+ * Returns `{ ok: true }` ONLY when the server responds with `response.ok && data.success === true`.
  */
 export async function submitRfq(payload: RfqPayload): Promise<RfqSubmitResult> {
-  // Honeypot guard — silently reject automated bot submissions
-  if (payload.botcheck) {
-    return { ok: true };
-  }
+  const requestBody: Record<string, string> = {
+    name: payload.fullName,
+    company: payload.companyName,
+    email: payload.email,
+    division: payload.division,
+    estimated_volume: payload.volume,
+    message: payload.message,
+    source: payload.source,
+  };
 
-  const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY?.trim();
-
-  if (!accessKey) {
-    return {
-      ok: false,
-      error: "missing_access_key",
-    };
+  if (payload.website && payload.website.trim() !== "") {
+    requestBody.website = payload.website;
   }
 
   try {
-    const response = await fetch("https://api.web3forms.com/submit", {
+    const response = await fetch("/api/rfq.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify({
-        access_key: accessKey,
-        subject: `New B2B RFQ Inquiry — ${payload.companyName || payload.fullName} (Haikou Shengtai)`,
-        from_name: "Haikou Shengtai Website",
-        replyto: payload.email,
-        botcheck: false,
-        name: payload.fullName,
-        company: payload.companyName,
-        email: payload.email,
-        division: payload.division,
-        estimated_volume: payload.volume,
-        message: payload.message || "(No additional technical notes provided)",
-        source: payload.source,
-      }),
+      body: JSON.stringify(requestBody),
     });
 
-    const data = (await response.json()) as {
-      success?: boolean;
-      message?: string;
-    };
-
-    if (!response.ok || !data.success) {
+    let data: { success?: boolean; message?: string } = {};
+    try {
+      data = (await response.json()) as { success?: boolean; message?: string };
+    } catch {
       return {
         ok: false,
-        error: data.message || "request_failed",
+        error: `Unexpected server response (HTTP ${response.status}).`,
+      };
+    }
+
+    if (!response.ok || data.success !== true) {
+      return {
+        ok: false,
+        error: data.message || `Request failed (HTTP ${response.status}).`,
       };
     }
 
@@ -72,7 +64,7 @@ export async function submitRfq(payload: RfqPayload): Promise<RfqSubmitResult> {
   } catch {
     return {
       ok: false,
-      error: "network_error",
+      error: "Network error while contacting mail server.",
     };
   }
 }

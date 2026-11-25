@@ -20,7 +20,7 @@ export function InquirySection() {
   const { inquiry } = t;
 
   const [submitting, setSubmitting] = useState(false);
-  const [submitFailed, setSubmitFailed] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [submittedSummary, setSubmittedSummary] = useState<{
     fullName: string;
     email: string;
@@ -34,7 +34,7 @@ export function InquirySection() {
     divisionIndex: 0,
     volumeIndex: 2,
     message: "",
-    botcheck: false,
+    website: "",
   });
 
   const selectedDivision =
@@ -48,7 +48,7 @@ export function InquirySection() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    setSubmitFailed(false);
+    setSubmitError(null);
 
     const result = await submitRfq({
       fullName: formData.fullName,
@@ -57,14 +57,14 @@ export function InquirySection() {
       division: selectedDivision,
       volume: selectedVolume,
       message: formData.message,
-      botcheck: formData.botcheck,
+      website: formData.website,
       source: "Home Page (/#rfq)",
     });
 
     setSubmitting(false);
 
     if (!result.ok) {
-      setSubmitFailed(true);
+      setSubmitError(result.error ?? "Unable to send inquiry.");
       return;
     }
 
@@ -81,7 +81,7 @@ export function InquirySection() {
       divisionIndex: 0,
       volumeIndex: 2,
       message: "",
-      botcheck: false,
+      website: "",
     });
   };
 
@@ -196,7 +196,7 @@ export function InquirySection() {
                       className="rounded-[2px]"
                       onClick={() => {
                         setSubmittedSummary(null);
-                        setSubmitFailed(false);
+                        setSubmitError(null);
                       }}
                     >
                       {inquiry.confirmation.resetButton}
@@ -205,17 +205,18 @@ export function InquirySection() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Web3Forms Honeypot Anti-Spam Field */}
+                  {/* Hidden Honeypot Anti-Spam Field */}
                   <input
-                    type="checkbox"
-                    name="botcheck"
+                    type="text"
+                    name="website"
                     tabIndex={-1}
                     autoComplete="off"
-                    checked={formData.botcheck}
+                    aria-hidden="true"
+                    value={formData.website}
                     onChange={(e) =>
                       setFormData((prev) => ({
                         ...prev,
-                        botcheck: e.target.checked,
+                        website: e.target.value,
                       }))
                     }
                     className="hidden"
@@ -356,20 +357,23 @@ export function InquirySection() {
                     />
                   </div>
 
-                  {submitFailed && (
-                    <p
+                  {submitError && (
+                    <div
                       role="alert"
                       className="rounded-[2px] border border-red-200 bg-red-50 px-3.5 py-3 text-xs leading-relaxed text-red-800"
                     >
-                      {inquiry.form.errorPrefix}{" "}
-                      <a
-                        href={`mailto:${site.email}`}
-                        className="font-mono font-medium underline underline-offset-4 hover:text-red-950"
-                      >
-                        {inquiry.form.errorFallbackCta}
-                      </a>
-                      .
-                    </p>
+                      <p className="font-medium">{submitError}</p>
+                      <p className="mt-1">
+                        {inquiry.form.errorPrefix}{" "}
+                        <a
+                          href={`mailto:${site.email}`}
+                          className="font-mono font-medium underline underline-offset-4 hover:text-red-950"
+                        >
+                          {inquiry.form.errorFallbackCta}
+                        </a>
+                        .
+                      </p>
+                    </div>
                   )}
 
                   <div className="flex flex-col gap-4 border-t border-neutral-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
