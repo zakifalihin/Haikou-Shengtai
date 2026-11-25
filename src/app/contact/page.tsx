@@ -7,7 +7,7 @@ import { Navbar } from "@/components/sections/Navbar";
 export const metadata: Metadata = {
   title: "Contact & Request Export Quotation (RFQ)",
   description:
-    "Request FOB Haikou / Yangpu or CIF global pricing, sample dispatch, batch COA/MSDS documentation, and OEM quotes directly from Haikou Shengtai Tropical-Crop Co., Ltd. (Est. 2006).",
+    "Request FOB Haikou/Yangpu or CIF global pricing, samples, COA/MSDS, and OEM quotes directly from Haikou Shengtai Tropical-Crop Co., Ltd. (Est. 2006).",
   keywords: [
     "Haikou Shengtai contact",
     "coconut activated carbon RFQ",
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
     url: "/contact",
     images: [
       {
-        url: "/images/carbon-division-editorial.jpg",
-        width: 1376,
-        height: 768,
+        url: "/images/og-cover.jpg",
+        width: 1200,
+        height: 630,
         alt: "Haikou Shengtai Global Export Desk",
       },
     ],
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: "Contact & RFQ | Haikou Shengtai",
     description:
       "Direct factory export inquiries for coconut food ingredients and activated carbon.",
-    images: ["/images/carbon-division-editorial.jpg"],
+    images: ["/images/og-cover.jpg"],
   },
 };
 

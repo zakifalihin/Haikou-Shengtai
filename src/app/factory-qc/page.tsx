@@ -7,7 +7,7 @@ import { Navbar } from "@/components/sections/Navbar";
 export const metadata: Metadata = {
   title: "Factory, Quality Control & Certifications",
   description:
-    "Vertically integrated Hainan coconut processing facility, rotary steam activation kilns, ASTM & HACCP testing laboratories, ISO 9001, HALAL, COA/MSDS compliance, and Haikou/Yangpu container export logistics.",
+    "Est. 2006 in Haikou, Hainan. Vertically integrated coconut processing, ASTM & HACCP testing labs, ISO 9001, HALAL, COA/MSDS, and port export logistics.",
   keywords: [
     "coconut processing factory Hainan",
     "activated carbon lab testing ASTM D4607",
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     url: "/factory-qc",
     images: [
       {
-        url: "/images/carbon-division-editorial.jpg",
-        width: 1376,
-        height: 768,
+        url: "/images/og-cover.jpg",
+        width: 1200,
+        height: 630,
         alt: "Haikou Shengtai Factory & Quality Control Laboratory",
       },
     ],
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "Factory, QC & Certifications | Haikou Shengtai",
     description:
       "Vertically integrated Hainan manufacturing with ASTM & HACCP in-house lab verification.",
-    images: ["/images/carbon-division-editorial.jpg"],
+    images: ["/images/og-cover.jpg"],
   },
 };
 

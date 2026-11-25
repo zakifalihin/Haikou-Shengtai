@@ -1,14 +1,13 @@
-import type { ProductData } from "@/data/products";
+import { PRODUCTS_DATA, type ProductData, type ProductDivision } from "@/data/products";
 
 /**
- * Centralized SEO & Structured Data configuration.
- * Set NEXT_PUBLIC_SITE_URL in production environment variables once final domain is live.
+ * Centralized SEO & Structured Data configuration for https://haikoushengtaitropical.com.
  */
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  "https://www.haikoushengtaitropical.com";
+  "https://haikoushengtaitropical.com";
 
-export const DEFAULT_OG_IMAGE = "/images/carbon-division-editorial.jpg";
+export const DEFAULT_OG_IMAGE = "/images/og-cover.jpg";
 
 export function buildOrganizationJsonLd() {
   return {
@@ -22,7 +21,7 @@ export function buildOrganizationJsonLd() {
     logo: `${SITE_URL}/favicon.ico`,
     image: `${SITE_URL}${DEFAULT_OG_IMAGE}`,
     description:
-      "Established in 2006 in Haikou, Hainan, Haikou Shengtai Tropical-Crop Co., Ltd. specializes in tropical crop cultivation, food-grade coconut processing, and international commodity trade across Southeast Asia (Indonesia & Vietnam) alongside coconut shell activated carbon and charcoal briquette exports.",
+      "Established in 2006 in Haikou, Hainan, Haikou Shengtai Tropical-Crop Co., Ltd. exports food-grade coconut ingredients and steam-activated coconut shell carbon & charcoal briquettes worldwide.",
     email: "info@haikoushengtaitropical.com",
     address: {
       "@type": "PostalAddress",
@@ -83,6 +82,78 @@ export function buildWebsiteJsonLd() {
     },
     inLanguage: ["en", "zh-CN", "id"],
   };
+}
+
+export function buildDivisionItemListJsonLd(divisionKey: ProductDivision) {
+  const isFood = divisionKey === "food";
+  const pagePath = isFood ? "/coconut-food" : "/activated-carbon";
+  const pageName = isFood
+    ? "Coconut Food Processing"
+    : "Activated Carbon & Charcoal Briquettes";
+  const items = PRODUCTS_DATA.filter((p) => p.divisionKey === divisionKey);
+
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "@id": `${SITE_URL}${pagePath}#catalog`,
+      name: `${pageName} — Haikou Shengtai Export Catalog`,
+      url: `${SITE_URL}${pagePath}`,
+      numberOfItems: items.length,
+      itemListElement: items.map((product, index) => {
+        const en = product.translations.en;
+        const productUrl = `${SITE_URL}/products/${product.slug}`;
+        return {
+          "@type": "ListItem",
+          position: index + 1,
+          url: productUrl,
+          item: {
+            "@type": "Product",
+            name: en.name,
+            description: en.shortDesc,
+            image: `${SITE_URL}${product.image}`,
+            sku: product.slug.toUpperCase(),
+            category: en.division,
+            brand: {
+              "@type": "Brand",
+              name: "Haikou Shengtai",
+            },
+            manufacturer: {
+              "@id": `${SITE_URL}/#organization`,
+            },
+            offers: {
+              "@type": "Offer",
+              url: productUrl,
+              availability: "https://schema.org/InStock",
+              businessFunction: "https://schema.org/Sell",
+              seller: {
+                "@id": `${SITE_URL}/#organization`,
+              },
+              areaServed: "Worldwide",
+            },
+          },
+        };
+      }),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: SITE_URL,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: pageName,
+          item: `${SITE_URL}${pagePath}`,
+        },
+      ],
+    },
+  ];
 }
 
 export function buildProductJsonLd(product: ProductData) {

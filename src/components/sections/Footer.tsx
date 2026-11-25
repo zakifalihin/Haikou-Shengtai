@@ -73,9 +73,9 @@ export function Footer() {
           {/* Link Columns */}
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-3 lg:col-span-7">
             <div>
-              <h3 className="font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-neutral-400">
+              <h2 className="font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-neutral-400">
                 {footer.divisionsHeading}
-              </h3>
+              </h2>
               <ul className="mt-4 space-y-3 text-sm">
                 {footer.divisionLinks.map((link) => (
                   <li key={link.label}>
@@ -91,9 +91,9 @@ export function Footer() {
             </div>
 
             <div>
-              <h3 className="font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-neutral-400">
+              <h2 className="font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-neutral-400">
                 {footer.qualityHeading}
-              </h3>
+              </h2>
               <ul className="mt-4 space-y-3 text-sm">
                 {footer.qualityLinks.map((link) => (
                   <li key={link.label}>
@@ -109,9 +109,9 @@ export function Footer() {
             </div>
 
             <div>
-              <h3 className="font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-neutral-400">
+              <h2 className="font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-neutral-400">
                 {footer.contactHeading}
-              </h3>
+              </h2>
               <ul className="mt-4 space-y-3 text-sm text-neutral-300">
                 <li>
                   <a

@@ -3,15 +3,17 @@ import type { Metadata } from "next";
 import { CoconutFoodView } from "@/components/pages/CoconutFoodView";
 import { Footer } from "@/components/sections/Footer";
 import { Navbar } from "@/components/sections/Navbar";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildDivisionItemListJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Coconut Food Processing & Export Ingredients",
   description:
-    "Export-grade desiccated coconut (high & low fat), UHT aseptic coconut milk & cream, and cold-pressed virgin / RBD coconut oil manufactured in Haikou, Hainan under HACCP and ISO 9001 controls.",
+    "HACCP-certified Hainan exporter of high/low-fat desiccated coconut, UHT aseptic coconut milk & cream, and cold-pressed virgin & RBD coconut oil.",
   keywords: [
-    "desiccated coconut supplier China",
-    "aseptic coconut milk manufacturer",
-    "virgin coconut oil bulk export",
+    "desiccated coconut exporter",
+    "coconut milk and cream supplier",
+    "virgin coconut oil bulk China",
     "RBD coconut oil flexitank",
     "Hainan coconut food processing",
     "OEM coconut ingredients",
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
     canonical: "/coconut-food",
   },
   openGraph: {
-    title: "Coconut Food Processing | Haikou Shengtai",
+    title: "Coconut Food Processing | Haikou Shengtai Tropical-Crop Co., Ltd.",
     description:
       "Food-grade desiccated coconut, aseptic coconut milk & cream, and virgin/RBD coconut oil directly from Hainan, China.",
     url: "/coconut-food",
@@ -45,6 +47,7 @@ export const metadata: Metadata = {
 export default function CoconutFoodPage() {
   return (
     <>
+      <JsonLd data={buildDivisionItemListJsonLd("food")} />
       <Navbar />
       <main className="flex-1">
         <CoconutFoodView />
