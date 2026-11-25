@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+/*
+ * Haikou Shengtai - design tokens (keep CSS comments ASCII-only for Tailwind v4 Turbopack loader)
+ * Canvas: #FFFFFF / #F7F8F7 | Brand: #143D2B | Ink: #111827 | Industrial Dark: #1C1F23 | Border: #E4E7E5
+ */
+:root {
+  --background: #ffffff;
+  --foreground: #111827;
+}
+
+@theme inline {
+  /* Surfaces */
+  --color-canvas: #ffffff;
+  --color-canvas-muted: #f7f8f7;
+
+  /* Brand - Deep Hainan Forest Green (single accent) */
+  --color-brand: #143d2b;
+  --color-brand-hover: #0e2e20;
+  --color-brand-tint: #e8efeb;
+
+  /* Typography and industrial neutrals */
+  --color-ink: #111827;
+  --color-ink-industrial: #1c1f23;
+  --color-ink-muted: #525252;
+  --color-ink-subtle: #737373;
+
+  /* Crisp 1px borders */
+  --color-line: #e4e7e5;
+  --color-line-dark: #2f343a;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Typography with Noto Sans SC for crisp Simplified Chinese rendering */
+  --font-sans: var(--font-inter), var(--font-noto-sc), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  --font-display: var(--font-jakarta), var(--font-noto-sc), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), var(--font-noto-sc), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+::selection {
+  background: var(--color-brand);
+  color: #ffffff;
+}
