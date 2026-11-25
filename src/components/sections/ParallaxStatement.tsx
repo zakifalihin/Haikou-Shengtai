@@ -10,8 +10,7 @@ import { useLanguage } from "@/context/LanguageContext";
  * Replace with wide-angle Haikou Shengtai plant / rotary kiln / food processing
  * line photography (e.g. "/images/factory-scale-haikou.jpg", >= 2400px wide).
  */
-const FACILITY_IMAGE_SRC =
-  "https://images.unsplash.com/photo-1566930665082-4ae9dbbb5b6b?auto=format&fit=crop&w=2400&q=85";
+const FACILITY_IMAGE_SRC = "/images/facility-scale.webp";
 
 export function ParallaxStatement() {
   const { t } = useLanguage();
@@ -71,6 +70,7 @@ export function ParallaxStatement() {
                 src={FACILITY_IMAGE_SRC}
                 alt={t.parallaxStatement.imageAlt}
                 fill
+                loading="lazy"
                 sizes="100vw"
                 className="h-full w-full object-cover object-center"
               />

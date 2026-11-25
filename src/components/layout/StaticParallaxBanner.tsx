@@ -61,10 +61,13 @@ export function StaticParallaxBanner({
           alt={imageAlt ?? title}
           fill
           priority
+          fetchPriority="high"
+          loading="eager"
+          decoding="sync"
           sizes="100vw"
           className="h-full w-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/35" />
       </div>
 
       {/* Bottom-Left Swiss Editorial Foreground */}
@@ -74,7 +77,7 @@ export function StaticParallaxBanner({
             {(breadcrumb || (breadcrumbTrail && breadcrumbTrail.length > 0)) && (
               <nav
                 aria-label="Breadcrumb"
-                className="mb-5 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-white/65"
+                className="mb-5 flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-white/85"
               >
                 <Link href="/" className="transition-colors hover:text-white">
                   {t.productDetail.homeLabel}
@@ -83,7 +86,8 @@ export function StaticParallaxBanner({
                 {breadcrumbTrail?.map((item) => (
                   <span key={item.label} className="flex items-center gap-2">
                     <ChevronRight
-                      className="size-3.5 text-white/35"
+                      aria-hidden="true"
+                      className="size-3.5 text-white/60"
                       strokeWidth={1.5}
                     />
                     {item.href ? (
@@ -102,7 +106,8 @@ export function StaticParallaxBanner({
                 {breadcrumb && (
                   <>
                     <ChevronRight
-                      className="size-3.5 text-white/35"
+                      aria-hidden="true"
+                      className="size-3.5 text-white/60"
                       strokeWidth={1.5}
                     />
                     <span className="text-white">{breadcrumb}</span>
@@ -111,7 +116,7 @@ export function StaticParallaxBanner({
               </nav>
             )}
 
-            <p className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-white/75 sm:text-xs">
+            <p className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-white/95">
               {eyebrow}
             </p>
 
@@ -120,7 +125,7 @@ export function StaticParallaxBanner({
             </h1>
 
             {subtitle && (
-              <p className="mt-4 max-w-[62ch] text-base leading-relaxed text-white/80 md:text-[17px]">
+              <p className="mt-4 max-w-[62ch] text-base leading-relaxed text-white/90 md:text-[17px]">
                 {subtitle}
               </p>
             )}

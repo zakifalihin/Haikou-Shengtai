@@ -14,10 +14,9 @@ import { useLanguage } from "@/context/LanguageContext";
  * - Food line: "/images/division-coconut-food.jpg"
  * - Carbon line: "/images/division-activated-carbon.jpg"
  */
-const FOOD_DIVISION_IMAGE =
-  "https://images.unsplash.com/photo-1559842911-25e8399e3c38?auto=format&fit=crop&w=1600&q=85";
+const FOOD_DIVISION_IMAGE = "/images/division-coconut-food.webp";
 
-const CARBON_DIVISION_IMAGE = "/images/carbon-division-editorial.jpg";
+const CARBON_DIVISION_IMAGE = "/images/carbon-division-editorial.webp";
 
 const reveal = {
   initial: { opacity: 0, y: 16 },
@@ -65,6 +64,7 @@ export function DualDivisionShowcase() {
                 src={FOOD_DIVISION_IMAGE}
                 alt={food.imageAlt}
                 fill
+                loading="lazy"
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
               />
@@ -131,6 +131,7 @@ export function DualDivisionShowcase() {
                 src={CARBON_DIVISION_IMAGE}
                 alt={carbon.imageAlt}
                 fill
+                loading="lazy"
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
               />

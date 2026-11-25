@@ -45,7 +45,7 @@ export const PRODUCTS_DATA: ProductData[] = [
     slug: "desiccated-coconut",
     category: "coconut-food",
     divisionKey: "food",
-    image: "/images/products/food-1.jpg",
+    image: "/images/products/food-1.webp",
     rfqDivisionIndex: 0,
     translations: {
       en: {
@@ -174,7 +174,7 @@ export const PRODUCTS_DATA: ProductData[] = [
     slug: "coconut-milk-cream",
     category: "coconut-food",
     divisionKey: "food",
-    image: "/images/products/food-2.jpg",
+    image: "/images/products/food-2.webp",
     rfqDivisionIndex: 1,
     translations: {
       en: {
@@ -303,7 +303,7 @@ export const PRODUCTS_DATA: ProductData[] = [
     slug: "virgin-coconut-oil",
     category: "coconut-food",
     divisionKey: "food",
-    image: "/images/products/food-3.jpg",
+    image: "/images/products/food-3.webp",
     rfqDivisionIndex: 1,
     translations: {
       en: {
@@ -432,7 +432,7 @@ export const PRODUCTS_DATA: ProductData[] = [
     slug: "granular-activated-carbon",
     category: "activated-carbon",
     divisionKey: "carbon",
-    image: "/images/products/carbon-1.jpg",
+    image: "/images/products/carbon-1.webp",
     rfqDivisionIndex: 3,
     translations: {
       en: {
@@ -564,7 +564,7 @@ export const PRODUCTS_DATA: ProductData[] = [
     slug: "gold-recovery-activated-carbon",
     category: "activated-carbon",
     divisionKey: "carbon",
-    image: "/images/products/carbon-2.jpg",
+    image: "/images/products/carbon-2.webp",
     rfqDivisionIndex: 4,
     translations: {
       en: {
@@ -696,7 +696,7 @@ export const PRODUCTS_DATA: ProductData[] = [
     slug: "coconut-charcoal-briquettes",
     category: "briquettes",
     divisionKey: "carbon",
-    image: "/images/products/carbon-3.jpg",
+    image: "/images/products/carbon-3.webp",
     rfqDivisionIndex: 5,
     translations: {
       en: {

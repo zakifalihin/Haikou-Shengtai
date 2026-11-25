@@ -28,9 +28,9 @@ export const metadata: Metadata = {
     url: "/coconut-food",
     images: [
       {
-        url: "/images/products/food-1.jpg",
+        url: "/images/og-cover.jpg",
         width: 1200,
-        height: 896,
+        height: 630,
         alt: "Haikou Shengtai Food-Grade Desiccated Coconut",
       },
     ],
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: "Coconut Food Processing | Haikou Shengtai",
     description:
       "HACCP-certified Hainan coconut food ingredients for global B2B manufacturers.",
-    images: ["/images/products/food-1.jpg"],
+    images: ["/images/og-cover.jpg"],
   },
 };
 

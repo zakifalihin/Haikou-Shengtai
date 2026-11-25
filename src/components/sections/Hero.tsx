@@ -3,26 +3,19 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 import { useLanguage } from "@/context/LanguageContext";
 
 /*
- * HERO 3-SLIDE EDITORIAL PHOTOGRAPHY
+ * HERO 3-SLIDE EDITORIAL PHOTOGRAPHY (Optimized Local WebP, < 105 KB each)
  * -----------------------------------------------------------------------------
- * Swap any URL below with local high-resolution client photography under `public/images/`
- * (recommended >= 2400x1600px, widescreen landscape, natural editorial lighting):
- * - 01 Coconut Food:      "/images/hero-coconut-food.jpg"
- * - 02 Activated Carbon:  "/images/carbon-hero-banner.jpg" (local studio photo)
- * - 03 Global Export:     "/images/hero-factory-export.jpg"
+ * Swap any file under `public/images/` with real client photography (<= 1400px WebP).
  */
 const HERO_IMAGES = {
-  "coconut-food":
-    "https://images.unsplash.com/photo-1567567278636-c8fa119561be?auto=format&fit=crop&w=2400&q=85",
-  "activated-carbon": "/images/carbon-hero-banner.jpg",
-  "global-export":
-    "https://images.unsplash.com/photo-1745147878224-2633491d3c07?auto=format&fit=crop&w=2400&q=85",
+  "coconut-food": "/images/hero-coconut-food.webp",
+  "activated-carbon": "/images/carbon-hero-banner.webp",
+  "global-export": "/images/hero-global-export.webp",
 } as const;
 
 const SLIDE_DURATION_MS = 5500;
@@ -41,49 +34,50 @@ export function Hero() {
     return () => window.clearInterval(timer);
   }, [slides.length]);
 
-  const activeSlide = slides[activeIndex] ?? slides[0];
-
   return (
     <section
       aria-labelledby="hero-heading"
       className="relative h-[92vh] min-h-[680px] w-full overflow-hidden bg-[#1C1F23] [clip-path:inset(0)]"
     >
-      {/* Static-on-Scroll Full-Bleed Slideshow Layer (Clipped to Hero Bounds) */}
+      {/* Static-on-Scroll Full-Bleed Slideshow Layer — Slide 0 paints immediately on SSR for fast LCP */}
       <div className="pointer-events-none fixed inset-0 z-0 h-full w-full">
-        <AnimatePresence mode="sync" initial={false}>
-          <motion.div
-            key={activeSlide.id}
-            initial={{ opacity: 0, scale: 1.04 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{
-              opacity: { duration: 1.2, ease: "easeInOut" },
-              scale: { duration: SLIDE_DURATION_MS / 1000, ease: "easeOut" },
-            }}
-            className="absolute inset-0 will-change-transform"
-          >
-            <Image
-              src={HERO_IMAGES[activeSlide.id]}
-              alt={activeSlide.imageAlt}
-              fill
-              priority
-              sizes="100vw"
-              className="h-full w-full object-cover object-center"
-            />
-          </motion.div>
-        </AnimatePresence>
+        {slides.map((slide, idx) => {
+          const isActive = idx === activeIndex;
+          const isFirst = idx === 0;
+          return (
+            <div
+              key={slide.id}
+              aria-hidden={!isActive}
+              className={`absolute inset-0 transition-[opacity,transform] duration-[1200ms] ease-in-out will-change-[opacity,transform] ${
+                isActive ? "scale-100 opacity-100" : "scale-[1.04] opacity-0"
+              }`}
+            >
+              <Image
+                src={HERO_IMAGES[slide.id]}
+                alt={slide.imageAlt}
+                fill
+                priority={isFirst}
+                fetchPriority={isFirst ? "high" : "low"}
+                loading={isFirst ? "eager" : "lazy"}
+                decoding={isFirst ? "sync" : "async"}
+                sizes="100vw"
+                className="h-full w-full object-cover object-center"
+              />
+            </div>
+          );
+        })}
 
-        {/* Constant Editorial Dark Gradient Overlay for 100% Legibility Across All Slides */}
+        {/* Strengthened Editorial Dark Gradient Scrim for WCAG AA (>= 4.5:1) Text Contrast */}
         <div
           aria-hidden
-          className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/25"
+          className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/35"
         />
       </div>
 
-      {/* Foreground Content — Clean Bottom-Left Swiss Editorial Typography */}
+      {/* Foreground Content — Immediate Paint (No Hidden Initial State) */}
       <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-end px-6 pt-28 pb-12 lg:px-8 lg:pb-16">
         <div className="max-w-4xl">
-          <p className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-white/75 sm:text-xs">
+          <p className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-white/95">
             {t.hero.eyebrow}
           </p>
 
@@ -94,17 +88,18 @@ export function Hero() {
             {t.hero.h1}
           </h1>
 
-          <p className="mt-6 max-w-[60ch] text-base leading-relaxed text-white/80 md:text-[17px]">
+          <p className="mt-6 max-w-[60ch] text-base leading-relaxed text-white/90 md:text-[17px]">
             {t.hero.subtitle}
           </p>
 
           <div className="mt-9">
             <Link
               href="/#catalog"
-              className="group inline-flex items-center gap-3 border-b border-white/60 pb-2 text-sm font-medium tracking-[0.02em] text-white transition-colors duration-200 hover:border-white"
+              className="group inline-flex min-h-[44px] items-center gap-3 border-b border-white/80 pb-2 text-sm font-medium tracking-[0.02em] text-white transition-colors duration-200 hover:border-white"
             >
               <span>{t.hero.cta}</span>
               <ArrowRight
+                aria-hidden="true"
                 className="size-4 transition-transform duration-200 group-hover:translate-x-1"
                 strokeWidth={1.5}
               />

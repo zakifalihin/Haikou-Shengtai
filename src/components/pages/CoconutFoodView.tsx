@@ -13,8 +13,7 @@ import { PRODUCTS_DATA } from "@/data/products";
  * COCONUT FOOD BANNER PLACEHOLDER (Unsplash)
  * Swap with real Hainan coconut plantation / food processing photo later.
  */
-const FOOD_BANNER_IMAGE =
-  "https://images.unsplash.com/photo-1577394221632-55dc64570920?auto=format&fit=crop&w=2400&q=85";
+const FOOD_BANNER_IMAGE = "/images/banner-coconut-food.webp";
 
 export function CoconutFoodView() {
   const { lang, t, pages } = useLanguage();
@@ -100,6 +99,7 @@ export function CoconutFoodView() {
                       src={product.image}
                       alt={p.imageAlt}
                       fill
+                      loading="lazy"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                     />

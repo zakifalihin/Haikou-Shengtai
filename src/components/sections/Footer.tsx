@@ -7,10 +7,15 @@ import { site } from "@/lib/site";
 import type { Locale } from "@/lib/translations";
 import { cn } from "@/lib/utils";
 
-const LOCALE_OPTIONS: { code: Locale; label: string; htmlLang: string }[] = [
-  { code: "id", label: "ID", htmlLang: "id" },
-  { code: "en", label: "EN", htmlLang: "en" },
-  { code: "zh", label: "中文", htmlLang: "zh-CN" },
+const LOCALE_OPTIONS: {
+  code: Locale;
+  label: string;
+  htmlLang: string;
+  ariaLabel: string;
+}[] = [
+  { code: "id", label: "ID", htmlLang: "id", ariaLabel: "Switch language to Indonesian" },
+  { code: "en", label: "EN", htmlLang: "en", ariaLabel: "Switch language to English" },
+  { code: "zh", label: "中文", htmlLang: "zh-CN", ariaLabel: "Switch language to Simplified Chinese" },
 ];
 
 const resolveHref = (href: string) =>
@@ -53,13 +58,14 @@ export function Footer() {
                     <button
                       type="button"
                       lang={option.htmlLang}
+                      aria-label={option.ariaLabel}
                       aria-pressed={active}
                       onClick={() => setLang(option.code)}
                       className={cn(
                         "cursor-pointer transition-colors",
                         active
                           ? "font-semibold text-white"
-                          : "text-neutral-400 hover:text-white",
+                          : "text-neutral-300 hover:text-white",
                       )}
                     >
                       {option.label}
@@ -131,9 +137,9 @@ export function Footer() {
         </div>
 
         {/* Bottom Copyright Line */}
-        <div className="mt-16 flex flex-col justify-between gap-4 border-t border-white/10 pt-8 text-xs text-neutral-500 sm:flex-row sm:items-center">
+        <div className="mt-16 flex flex-col justify-between gap-4 border-t border-white/10 pt-8 text-xs text-neutral-300 sm:flex-row sm:items-center">
           <p>{footer.copyright}</p>
-          <p className="font-mono text-[11px] uppercase tracking-[0.12em]">
+          <p className="font-mono text-xs uppercase tracking-[0.12em]">
             {footer.exportNotice}
           </p>
         </div>

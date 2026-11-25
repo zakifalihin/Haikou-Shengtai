@@ -11,10 +11,15 @@ import { site } from "@/lib/site";
 import type { Locale } from "@/lib/translations";
 import { cn } from "@/lib/utils";
 
-const LOCALE_OPTIONS: { code: Locale; label: string; htmlLang: string }[] = [
-  { code: "id", label: "ID", htmlLang: "id" },
-  { code: "en", label: "EN", htmlLang: "en" },
-  { code: "zh", label: "中文", htmlLang: "zh-CN" },
+const LOCALE_OPTIONS: {
+  code: Locale;
+  label: string;
+  htmlLang: string;
+  ariaLabel: string;
+}[] = [
+  { code: "id", label: "ID", htmlLang: "id", ariaLabel: "Switch language to Indonesian" },
+  { code: "en", label: "EN", htmlLang: "en", ariaLabel: "Switch language to English" },
+  { code: "zh", label: "中文", htmlLang: "zh-CN", ariaLabel: "Switch language to Simplified Chinese" },
 ];
 
 export function Navbar() {
@@ -121,6 +126,7 @@ export function Navbar() {
                   <button
                     type="button"
                     lang={option.htmlLang}
+                    aria-label={option.ariaLabel}
                     aria-pressed={active}
                     onClick={() => setLang(option.code)}
                     className={cn(
@@ -130,8 +136,8 @@ export function Navbar() {
                           ? "border-[#143D2B] font-semibold text-[#111827]"
                           : "border-white font-semibold text-white"
                         : isSolid
-                          ? "border-transparent text-neutral-400 hover:text-[#111827]"
-                          : "border-transparent text-white/55 hover:text-white",
+                          ? "border-transparent text-neutral-600 hover:text-[#111827]"
+                          : "border-transparent text-white/80 hover:text-white",
                     )}
                   >
                     {option.label}
@@ -229,13 +235,14 @@ export function Navbar() {
                         <button
                           type="button"
                           lang={option.htmlLang}
+                          aria-label={option.ariaLabel}
                           aria-pressed={active}
                           onClick={() => setLang(option.code)}
                           className={cn(
                             "cursor-pointer border-b pb-0.5 transition-colors",
                             active
                               ? "border-[#143D2B] font-semibold text-[#111827]"
-                              : "border-transparent text-neutral-400 hover:text-[#111827]",
+                              : "border-transparent text-neutral-600 hover:text-[#111827]",
                           )}
                         >
                           {option.label}

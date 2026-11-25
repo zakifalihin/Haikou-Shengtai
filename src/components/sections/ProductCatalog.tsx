@@ -105,6 +105,7 @@ export function ProductCatalog() {
                     src={product.image}
                     alt={content.imageAlt}
                     fill
+                    loading="lazy"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                   />

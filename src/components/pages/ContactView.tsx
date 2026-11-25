@@ -17,11 +17,9 @@ import { site } from "@/lib/site";
  * - Top Banner: "/images/contact-port-hero.jpg"
  * - Bottom Strip: "/images/contact-container-logistics.jpg"
  */
-const HERO_BANNER_IMAGE =
-  "https://images.unsplash.com/photo-1745147878224-2633491d3c07?auto=format&fit=crop&w=2400&q=85";
+const HERO_BANNER_IMAGE = "/images/hero-global-export.webp";
 
-const LOGISTICS_STRIP_IMAGE =
-  "https://images.unsplash.com/photo-1774199102899-db6a49abb42b?auto=format&fit=crop&w=2400&q=85";
+const LOGISTICS_STRIP_IMAGE = "/images/contact-logistics.webp";
 
 const inputClass =
   "w-full rounded-[2px] border border-neutral-300 bg-white px-3.5 py-2.5 text-sm text-[#111827] placeholder:text-neutral-400 transition-colors focus:border-[#143D2B] focus:outline-none";
@@ -481,6 +479,7 @@ export function ContactView() {
             src={LOGISTICS_STRIP_IMAGE}
             alt="Ocean container freight vessel for global Hainan export shipping"
             fill
+            loading="lazy"
             sizes="100vw"
             className="h-full w-full object-cover object-center"
           />

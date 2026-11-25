@@ -13,7 +13,7 @@ import { PRODUCTS_DATA } from "@/data/products";
  * ACTIVATED CARBON BANNER PLACEHOLDER (Unsplash)
  * Swap with real rotary kiln / coconut shell charcoal photo later.
  */
-const CARBON_BANNER_IMAGE = "/images/carbon-hero-banner.jpg";
+const CARBON_BANNER_IMAGE = "/images/carbon-hero-banner.webp";
 
 export function ActivatedCarbonView() {
   const { lang, t, pages } = useLanguage();
@@ -101,6 +101,7 @@ export function ActivatedCarbonView() {
                       src={product.image}
                       alt={p.imageAlt}
                       fill
+                      loading="lazy"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                     />

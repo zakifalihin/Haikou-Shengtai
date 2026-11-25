@@ -11,8 +11,7 @@ import { useLanguage } from "@/context/LanguageContext";
  * FACTORY & QC BANNER PLACEHOLDER (Unsplash)
  * Swap with real Haikou manufacturing plant / laboratory photo later.
  */
-const FACTORY_BANNER_IMAGE =
-  "https://images.unsplash.com/photo-1720036237334-9263cd28c3d4?auto=format&fit=crop&w=2400&q=85";
+const FACTORY_BANNER_IMAGE = "/images/banner-factory-qc.webp";
 
 export function FactoryQCView() {
   const { t, pages } = useLanguage();
